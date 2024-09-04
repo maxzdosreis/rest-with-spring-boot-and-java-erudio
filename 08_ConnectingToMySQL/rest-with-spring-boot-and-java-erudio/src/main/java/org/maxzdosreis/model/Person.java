@@ -46,16 +46,16 @@ public class Person implements Serializable{
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		firstName = firstName;
+	public void setFirstName(String FirstName) {
+		firstName = FirstName;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		lastName = lastName;
+	public void setLastName(String LastName) {
+		lastName = LastName;
 	}
 
 	public String getAddress() {

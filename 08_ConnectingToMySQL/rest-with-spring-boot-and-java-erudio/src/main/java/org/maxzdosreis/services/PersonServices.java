@@ -1,6 +1,5 @@
 package org.maxzdosreis.services;
 
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonServices {
+	
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
 	
 	@Autowired
@@ -19,7 +19,6 @@ public class PersonServices {
 	
 	public List<Person> findAll() {
 		logger.info("Finding all people!");
-		
 		return repository.findAll();
 	}
 
@@ -36,8 +35,9 @@ public class PersonServices {
 	
 	public Person update(Person person) {
 		logger.info("Updating one person!");
+		
 		Person entity = repository.findById(person.getId())
-		.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
