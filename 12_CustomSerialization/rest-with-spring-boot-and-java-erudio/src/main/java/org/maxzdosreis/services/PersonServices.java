@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.maxzdosreis.data.vo.v1.PersonVO;
-import org.maxzdosreis.data.vo.v2.PersonVOV2;
 import org.maxzdosreis.exceptions.ResourceNotFoundException;
 import org.maxzdosreis.mapper.DozerMapper;
-import org.maxzdosreis.mapper.custom.PersonMapper;
 import org.maxzdosreis.model.Person;
 import org.maxzdosreis.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,6 @@ public class PersonServices {
 	@Autowired
 	PersonRepository repository;
 	
-	@Autowired
-	PersonMapper mapper;
-	
 	public List<PersonVO> findAll() {
 		logger.info("Finding all people!");
 		return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
@@ -35,18 +30,11 @@ public class PersonServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
-
+	
 	public PersonVO create(PersonVO person) {
 		logger.info("Creating one person!");
 		var entity = DozerMapper.parseObject(person, Person.class);
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
-		return vo;
-	}
-
-	public PersonVOV2 createV2(PersonVOV2 person) {
-		logger.info("Creating one person wih V2!");
-		var entity = mapper.convertVoToEntity(person);
-		var vo = mapper.convertEntityToVo(repository.save(entity));
 		return vo;
 	}
 	
